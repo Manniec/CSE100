@@ -19,7 +19,25 @@ maxSubArr(A, low, high)
 using namespace std;
 
 int* maxCrossSubArr(int* arr, int start, int mid, int end){
-
+    int lsum = INT_MIN, rsum = INT_MIN, sum = 0;
+    int* ans = new int[3];
+    for (int i = mid; i >= start; i--){
+        sum = sum + arr[i];
+        if (sum > lsum){
+            lsum = sum;
+            ans[0] = i; //maxLeft
+        }
+    }
+    sum = 0;
+    for (int i = mid ; i <= end; i++){
+        sum = sum + arr[i];
+        if (sum > rsum){
+            rsum = sum;
+            ans[1] = i; //maxRight
+        }
+    }
+    ans[2] = lsum + rsum;
+    return ans;
 }
 
 
