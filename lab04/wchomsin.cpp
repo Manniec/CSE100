@@ -29,7 +29,7 @@ int* maxCrossSubArr(int* arr, int start, int mid, int end){
         }
     }
     sum = 0;
-    for (int i = mid ; i <= end; i++){
+    for (int i = mid+1 ; i <= end; i++){
         sum = sum + arr[i];
         if (sum > rsum){
             rsum = sum;
@@ -68,4 +68,32 @@ int* maxSubArr(int* arr, int start, int end){
             return cross;
         }
     }
+}
+
+int main(){
+    // Read array of values
+    int N; //num of elements to be sorted
+    cin >> N;
+
+    int* arr = new int[N];
+    for (int i = 0; i < N; i++){
+
+        int temp;
+        cin >> temp;
+        arr[i] = temp;
+
+    }
+
+    int* ans = maxSubArr(arr, 0, N-1);
+    
+    /*
+    for(int i = 0; i < 3; i++){
+        cout << ans[i];
+    }
+    */
+
+    cout<<ans[2];
+    
+    delete[] ans;
+    return 0;
 }
