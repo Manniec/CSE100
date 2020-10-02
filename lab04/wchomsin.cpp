@@ -19,20 +19,20 @@ maxSubArr(A, low, high)
 using namespace std;
 
 int* maxCrossSubArr(int* arr, int start, int mid, int end){
-    int lsum = INT_MIN, rsum = INT_MIN, sum = 0;
-    int* ans = new int[3];
-    for (int i = mid; i >= start; i--){
+    int lsum = INT_MIN, rsum = INT_MIN, sum = 0; //preset left-sum and right-sum to negative infinity
+    int* ans = new int[3]; //dynamic arr allocation
+    for (int i = mid; i >= start; i--){ //search for max subarr of left
         sum = sum + arr[i];
         if (sum > lsum){
-            lsum = sum;
+            lsum = sum; //left-sum
             ans[0] = i; //maxLeft
         }
     }
     sum = 0;
-    for (int i = mid+1 ; i <= end; i++){
+    for (int i = mid+1 ; i <= end; i++){ //search for max subarr of right
         sum = sum + arr[i];
         if (sum > rsum){
-            rsum = sum;
+            rsum = sum; //right-sum
             ans[1] = i; //maxRight
         }
     }
@@ -41,9 +41,9 @@ int* maxCrossSubArr(int* arr, int start, int mid, int end){
 }
 
 
-int* maxSubArr(int* arr, int start, int end){
+int* maxSubArr(int* arr, int start, int end){ //returns pointer
     if (start == end){
-        int* ans = new int[3];
+        int* ans = new int[3]; //dynamic memory allocation (arr should exist after func ends)
         ans[0] = start;
         ans[1] = end;
         ans[2] = arr[end];
@@ -51,11 +51,12 @@ int* maxSubArr(int* arr, int start, int end){
     }
     else {
         int mid = (start + end)/2, *left, *right, *cross; //declare pointers & mid
-        left = maxSubArr(arr, start, mid);
+        left = maxSubArr(arr, start, mid); 
         right = maxSubArr(arr, mid+1, end);
         cross = maxCrossSubArr(arr, start, mid, end);
+        //compare maxSubArrays of left,right,cross
         if ((left[2] >= right[2]) && (left[2] >= cross[2])){
-            delete[] right;
+            delete[] right; //clear memory, dont need these dynamic arrays
             delete[] cross;
             return left;
         } else if ((right[2] >= left[2]) && (right[2] >= cross[2])){
