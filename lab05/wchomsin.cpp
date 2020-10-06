@@ -10,7 +10,7 @@ void printArr(int*arr, int length){
 
 int maxHeapify(int* arr, int root, int N){ //let node be index of node array, N be heap size
     int oldMaxVal=0, newMaxNode, left = 2*root, right = (2*root)+1; //indexes for left and right children of node
-    cout<< "root: "<< root << "; arr[root]: "<<arr[root-1];
+    //cout<< "root: "<< root << "; arr[root]: "<<arr[root-1];
     if ((left <= N) && (arr[left-1] > arr[root-1])){
         newMaxNode = left;
     }else {
@@ -19,8 +19,8 @@ int maxHeapify(int* arr, int root, int N){ //let node be index of node array, N 
     if ((right <= N) && (arr[right-1] > arr[newMaxNode-1])){
         newMaxNode = right;
     }
-    cout<< "; newRoot: "<<newMaxNode<< "; newMax: " << arr[newMaxNode-1] <<endl;
-    printArr(arr,N);
+    //cout<< "; newRoot: "<<newMaxNode<< "; newMax: " << arr[newMaxNode-1] <<endl;
+    //printArr(arr,N);
     if (newMaxNode != root){
         oldMaxVal = arr[root-1];
         arr[root-1] = arr[newMaxNode-1];
@@ -39,7 +39,7 @@ int buildMaxHeap(int* arr, int N){
 
 int HeapSort(int* arr, int N){
     buildMaxHeap(arr, N);
-    cout<< "HEAPSORT:"<<endl;
+    //cout<< "HEAPSORT:"<<endl;
     int newRoot;
     for (int i = N-1; i >= 1; i--){
         newRoot = arr[i];
@@ -52,7 +52,7 @@ int HeapSort(int* arr, int N){
 
 int main(){
     //Read test files into array
-    /*
+    
     int N;
     cin >> N;
 
@@ -64,12 +64,12 @@ int main(){
         arr[i] = temp;
 
     }
-    */
+    
     
     //tester arr
     //int arr [] = {16,4,10,14,7,9,3,2,8,1};//for max heapify
-    int arr [] = {4,1,3,2,16,9,10,14,8,7}; //for buildmaxheap & heapsort
-    int N = 10;
+    //int arr [] = {4,1,3,2,16,9,10,14,8,7}; //for buildmaxheap & heapsort
+    //int N = 10;
     //int i = 2;
 
     //call Heap Sort
@@ -78,9 +78,7 @@ int main(){
     HeapSort(arr, N);
 
     //print sorted output (non-decreasing)
-    for (int i = 0; i < N; i++){
-        cout << arr[i]<<";";
-    }
+    printArr(arr,N);
 
 
 }
