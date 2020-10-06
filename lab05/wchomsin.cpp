@@ -39,12 +39,13 @@ int buildMaxHeap(int* arr, int N){
 
 int HeapSort(int* arr, int N){
     buildMaxHeap(arr, N);
-    int newMax;
-    for (int i = N-1; i > 0; i--){
-        newMax = arr[i];
+    cout<< "HEAPSORT:"<<endl;
+    int newRoot;
+    for (int i = N-1; i >= 1; i--){
+        newRoot = arr[i];
         arr[i] = arr[0];
-        arr[0] = newMax;
-        maxHeapify(arr, 0, N-1);
+        arr[0] = newRoot;
+        maxHeapify(arr, 1, i);
     }
     return 0;
 }
@@ -67,14 +68,14 @@ int main(){
     
     //tester arr
     //int arr [] = {16,4,10,14,7,9,3,2,8,1};//for max heapify
-    int arr [] = {4,1,3,2,16,9,10,14,8,7}; //for buildmaxheap
+    int arr [] = {4,1,3,2,16,9,10,14,8,7}; //for buildmaxheap & heapsort
     int N = 10;
     //int i = 2;
 
     //call Heap Sort
-    buildMaxHeap(arr, N);
+    //buildMaxHeap(arr, N);
     //maxHeapify(arr, 2, N);
-    //HeapSort(arr, N);
+    HeapSort(arr, N);
 
     //print sorted output (non-decreasing)
     for (int i = 0; i < N; i++){
