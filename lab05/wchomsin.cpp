@@ -66,8 +66,8 @@ int main(){
     */
     
     //tester arr
-    int arr [] = {16,4,10,14,7,9,3,2,8,1};//for max heapify
-    //int arr [] = {16,4,10,14,7};
+    //int arr [] = {16,4,10,14,7,9,3,2,8,1};//for max heapify
+    int arr [] = {4,1,3,2,16,9,10,14,8,7}; //for buildmaxheap
     int N = 10;
     //int i = 2;
 
