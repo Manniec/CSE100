@@ -3,7 +3,7 @@
 using namespace std;
 
 int partition(int* arr, int start, int end){
-    int pivot = arr[end], i = start-1, temp; //need to switch pivot from end to random
+    int pivot = arr[end], i = start-1, temp; 
     for (int j = start; j <= end-1; j++){
         if (arr[j] <= pivot){
             i = i + 1;
@@ -18,9 +18,17 @@ int partition(int* arr, int start, int end){
     return (i + 1);
 }
 
+int randomPartition(int* arr, int start, int end){
+    int temp, i = rand() % (end-start) + (start);
+    temp = arr[end];
+    arr[end] = arr[i];
+    arr[i] = temp;
+    return partition(arr, start, end);
+}
+
 int quicksort(int* arr, int start, int end){
     if (start < end){
-        int mid = partition(arr, start, end);
+        int mid = randomPartition(arr, start, end); //QuickSort using random partition
         quicksort(arr, start, mid-1);
         quicksort(arr, mid+1, end);
     }
