@@ -1,11 +1,12 @@
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 int partition(int* arr, int start, int end){
     int pivot = arr[end], i = start-1, temp; //need to switch pivot from end to random
-    for (int j = start; j < end-1; j++){
+    for (int j = start; j <= end-1; j++){
         if (arr[j] <= pivot){
-            i++;
+            i = i + 1;
             temp = arr[i];
             arr[i] = arr[j];
             arr[j] = temp;
