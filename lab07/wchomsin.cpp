@@ -79,15 +79,6 @@ int main(){
     int N, temp;
     cin >> N;
 
-    // int* arr = new int [N]; //initalize array size N
-    // for (int i = 0; i < N; i++){
-        
-    //     int temp;
-    //     cin >> temp;
-    //     arr[i] = temp;
-
-    // }
-
     vector<int> arr[N];
 
     for (int i = 0; i < N; i++){
@@ -99,8 +90,9 @@ int main(){
         }
     }
 
-    //radixsort(arr, N, 10);
+    radixsort(arr, N, 10);
     
+    /*
     for( int j = 9; j >=0 ; j--){
         vector<int> b[N];
         countingsortArr(arr, b, 9, N, j);
@@ -117,7 +109,13 @@ int main(){
         }
         
     }
+    */
    
+   //Print output
+    for (int i = 0; i < N; i++){
+        printVect(arr[i]);
+        cout<<endl;
+    }
 
     
 
