@@ -6,7 +6,7 @@ using namespace std;
 void printHashTable (list<int>* table, int m){
     //list <int> :: iterator it; //create list iterator
     for (int i = 0; i < m; i ++){
-        cout<< i << " : " << *(table[i].begin());
+        cout<< i << " : ";
         for(list <int> :: iterator it = table[i].begin(); it != table[i].end(); it++){
             cout<<"->"<< *it;
         }
@@ -32,6 +32,8 @@ int main(){
     //Read Test Files
     int m, temp;
     cin >> m; //size of hash table
+    
+    list<int> hashTable[m]; //initalize hashtable (array of linked lists)
 
     string command = "";
     while (command != "e"){
@@ -39,7 +41,8 @@ int main(){
         if (command == "e"){
             return 0;
         }else if(command == "o"){
-            cout<<"Output Hashtable"<<endl;
+            //cout<<"Output Hashtable"<<endl;
+            printHashTable(hashTable, m);
         }else if (command == "i"){
             cin >> temp;
             cout<< "insert "<<temp<<endl;
