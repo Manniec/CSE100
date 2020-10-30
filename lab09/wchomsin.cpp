@@ -23,14 +23,8 @@ void chainedHashInsert (list<int>* table, int m, int key){
     table[hashFunc].push_front(key);
 }
 
-bool chainedHashDelete (list<int>* table, int key){
-    cout<< "delete "<<key<<endl;
-    return true; //key was found: DELETED
-    return false; //key was not found: DELETE FAILED
-}
-
 int* chainedHashSearch (list<int>* table, int m, int key){
-    cout << "search "<< key <<endl;
+    //cout << "search "<< key <<endl;
     int listIndex = 0, hashFunc = key % m, *location = NULL; //initialize location to null pointer
     for(list <int> :: iterator it = table[hashFunc].begin(); it != table[hashFunc].end(); ++it){//iterate list
             if(*it == key){ //Checking for Key
@@ -41,6 +35,18 @@ int* chainedHashSearch (list<int>* table, int m, int key){
             listIndex++;
     }
     return location; //returns null pointer if "NOT FOUND"
+}
+
+bool chainedHashDelete (list<int>* table, int m, int key){
+    //cout<< "delete "<<key<<endl;
+    int hashFunc = key % m; //initialize location to null pointer
+    for(list <int> :: iterator it = table[hashFunc].begin(); it != table[hashFunc].end(); ++it){//iterate list
+            if(*it == key){ //Checking for Key
+                table[hashFunc].erase(it);
+                return true; //key was found: DELETED
+            }
+    }
+    return false; //key was not found: DELETE FAILED
 }
 
 int main(){
@@ -63,7 +69,11 @@ int main(){
             chainedHashInsert(hashTable, m, temp);
         }else if (command == "d"){
             cin >> temp;
-            chainedHashDelete (hashTable, temp);
+            if(chainedHashDelete (hashTable, m, temp)){
+                cout<<temp<<" : DELETED"<<endl;
+            }else{
+                cout<<temp<<" : DELETE FAILED"<<endl;
+            }
         }else if (command == "s"){
             cin >> temp;
             int* loc = chainedHashSearch(hashTable, m, temp);
@@ -72,6 +82,7 @@ int main(){
             }else{
                 cout<< temp << " : NOT FOUND"<<endl;
             }
+            delete[] loc; //free allocated array memory
         }
     }
 }
