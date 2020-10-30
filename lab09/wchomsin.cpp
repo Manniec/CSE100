@@ -7,25 +7,40 @@ void printHashTable (list<int>* table, int m){
     //list <int> :: iterator it; //create list iterator
     for (int i = 0; i < m; i ++){
         cout<< i << " : ";
-        for(list <int> :: iterator it = table[i].begin(); it != table[i].end(); it++){
-            cout<<"->"<< *it;
+        for(list <int> :: iterator it = table[i].begin(); it != table[i].end(); ++it){
+            cout<< *it; 
+            if(it != --table[i].end()){ //dont print arrow for last item (-- refers to item before last)
+                cout << "->";
+            }
         }
         cout<<endl;
     }
 }
 
-void chainedHashInsert (list<int>* table, int key){
-
+void chainedHashInsert (list<int>* table, int m, int key){
+    //cout<< "insert "<<key<<endl;
+    int hashFunc = key % m; //h(k)
+    table[hashFunc].push_front(key);
 }
 
 bool chainedHashDelete (list<int>* table, int key){
+    cout<< "delete "<<key<<endl;
     return true; //key was found: DELETED
     return false; //key was not found: DELETE FAILED
 }
 
-int* chainedHashSearch (list<int>* , int key){
-    int* location = new int [2];
-    return location;
+int* chainedHashSearch (list<int>* table, int m, int key){
+    cout << "search "<< key <<endl;
+    int listIndex = 0, hashFunc = key % m, *location = NULL; //initialize location to null pointer
+    for(list <int> :: iterator it = table[hashFunc].begin(); it != table[hashFunc].end(); ++it){//iterate list
+            if(*it == key){ //Checking for Key
+                location = new int [2]; //dynamic alloc & set location to {hashTableindex, linkedListIndex} 
+                location[0] = hashFunc;
+                location[1] = listIndex;
+            }
+            listIndex++;
+    }
+    return location; //returns null pointer if "NOT FOUND"
 }
 
 int main(){
@@ -45,13 +60,18 @@ int main(){
             printHashTable(hashTable, m);
         }else if (command == "i"){
             cin >> temp;
-            cout<< "insert "<<temp<<endl;
+            chainedHashInsert(hashTable, m, temp);
         }else if (command == "d"){
             cin >> temp;
-            cout<< "delete "<<temp<<endl;
+            chainedHashDelete (hashTable, temp);
         }else if (command == "s"){
             cin >> temp;
-            cout << "search "<< temp <<endl;
+            int* loc = chainedHashSearch(hashTable, m, temp);
+            if (loc){ //if not null pointer, prints loc, else prints NOT FOUND
+                cout<< temp << ": FOUND AT "<< loc[0]<<","<<loc[1]<<endl;
+            }else{
+                cout<< temp << " : NOT FOUND"<<endl;
+            }
         }
     }
 }
